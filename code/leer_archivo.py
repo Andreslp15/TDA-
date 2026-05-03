@@ -24,8 +24,22 @@ def leer_archivo(ruta_archivo):
         lineas = lineas[1:]
 
     for linea in lineas:
+        lineas = linea.strip()
+
+        if not lineas:
+            continue
+
         try:
-            dia, esfuerzo, energia = map(int, linea.strip().split(','))
+            dia, esfuerzo, energia = map(int, linea.split(','))
+
+            if esfuerzo < 0 or energia < 0:
+                print(f"Los valores de esfuerzo y energia no pueden ser negativos.")
+                return None
+
+            if len(energias) > 1 and energia > energias[-1]:
+                print(f"La energia debe ser mayor o igual a la anterior.")
+                return None
+
             esfuerzos.append(esfuerzo)
             energias.append(energia)
             dias += 1
@@ -33,4 +47,8 @@ def leer_archivo(ruta_archivo):
             print(f"La linea {linea.strip()} no tiene el formato correcto.")
             return None
 
+    if dias == 0:
+        print("No se han proporcionado datos validos")
+        return None
+    
     return dias, esfuerzos, energias

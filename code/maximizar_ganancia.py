@@ -2,6 +2,18 @@ from leer_archivo import leer_archivo
 
 def maximizar_esfuerzo(dias, esfuerzos, energias):
 
+    if dias is None or esfuerzos is None or energias is None:
+        return None, None
+
+    if not isinstance(dias, int) or dias <= 0:
+        return None, None
+
+    if not isinstance(esfuerzos, list) or not isinstance(energias, list):
+        return None, None
+
+    if len(esfuerzos) < dias + 1 or len(energias) < dias + 1:
+        return None, None
+
     ganancia = [[0] * (dias + 2) for i in range(dias + 2)]
 
     for dia in range(dias, 0, -1):

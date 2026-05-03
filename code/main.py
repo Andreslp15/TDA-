@@ -18,6 +18,10 @@ def main():
         ganancia_optima, tabla = maximizar_esfuerzo(dias, esfuerzos, energias)
         camino = reconstruir_solucion(tabla, dias, esfuerzos, energias)
 
+        if ganancia_optima is None:
+            print("Los datos pasados son invalidos")
+            return
+
         print(f"La ganancia optima es: {ganancia_optima}")
         print("El camino contruido es: ")
 

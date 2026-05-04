@@ -40,7 +40,7 @@ def reconstruir_solucion(ganancias, dias, esfuerzos, energias):
         ganancia_minima_entrenando = min(esfuerzos[dia], energias[posicion])
         valor_entrenamiento = ganancia_minima_entrenando + ganancias[dia + 1][posicion + 1]
 
-        if ganancias[dia][posicion] == valor_entrenamiento:
+        if valor_entrenamiento >= ganancias[dia + 1][1]:
             entrenamientos.append("Entrenar")
             posicion += 1
         else:

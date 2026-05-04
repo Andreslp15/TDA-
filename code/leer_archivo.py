@@ -4,7 +4,7 @@ def leer_archivo(ruta_archivo):
 
     try:
         with open(ruta_archivo, 'r') as archivo:
-            lineas = archivo.readlines()
+            lineas = [linea.strip() for linea in archivo.readlines() if linea.strip() ]
     except FileNotFoundError:
         print(f"Archivo no encontrado. Por favor ingrese una ruta correcta.")
         return None
@@ -16,39 +16,42 @@ def leer_archivo(ruta_archivo):
         print("No se ha encontrado ningun dato a analizar")
         return None
 
-    dias = 0
-    esfuerzos = [0]
-    energias = [0]
+    try:
+        dias = int(lineas[0])
 
-    if lineas[0].startswith("S"):
-        lineas = lineas[1:]
+        if dias <= 0:
+            print("El numero de dias debe ser mayor a 0")
+            return None
 
-    for linea in lineas:
-        lineas = linea.strip()
+        if len(lineas) < (2 * dias + 1):
+            print("No se proporcionaron la cantidad de datos solicitados")
+            return None
 
-        if not lineas:
-            continue
+        esfuerzos = [0]
+        energias = [0]
 
-        try:
-            dia, esfuerzo, energia = map(int, linea.split(','))
-
-            if esfuerzo < 0 or energia < 0:
-                print(f"Los valores de esfuerzo y energia no pueden ser negativos.")
-                return None
-
-            if len(energias) > 1 and energia > energias[-1]:
-                print(f"La energia debe ser mayor o igual a la anterior.")
+        for i in range(1, dias + 1):
+            esfuerzo = int(lineas[i])
+            if esfuerzo < 0:
+                print("Los esfuerzos no deben ser negativos")
                 return None
 
             esfuerzos.append(esfuerzo)
-            energias.append(energia)
-            dias += 1
-        except ValueError:
-            print(f"La linea {linea.strip()} no tiene el formato correcto.")
-            return None
 
-    if dias == 0:
-        print("No se han proporcionado datos validos")
+        for i in range(dias + 1, 2 * dias + 1):
+            energia = int(lineas[i])
+            if energia < 0:
+                print("Las energias no deben ser negativas")
+                return None
+
+            if len(energias) > 1 and energia > energias[-1]:
+                print("Las energias deben ser de mayor a menor")
+                return None
+
+            energias.append(energia)
+
+    except ValueError:
+        print("Los datos ingresados no son validos")
         return None
-    
+
     return dias, esfuerzos, energias

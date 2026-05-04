@@ -1,7 +1,6 @@
 ### AL ###
 #Template for AL projects for Dynamics 365 Business Central
 #launch.json folder
-.vscode/
 #Cache folder
 .alcache/
 #Symbols folder
@@ -21,5 +20,15 @@ rad.json
 *.flf
 #Test results file
 TestResults.xml
-*.idea
-*.env
+# Entornos virtuales
+.env/
+venv/
+env/
+# IDES
+.idea/
+.vscode/
+*.iml
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class

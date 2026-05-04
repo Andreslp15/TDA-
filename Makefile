@@ -13,7 +13,14 @@ $(VENV)/bin/activate: requerimientos.txt
 
 install: $(VENV)/bin/activate
 
-run: install
+run:
+	@if [ -z "$(FILE)" ]; then \
+  		echo "Debes especificar una ruta de la forma make run FILE=ejemplos/3.txt"; \
+  	else \
+  		$(PYTHON) code/tp2.py $(FILE); \
+  	fi
+
+mediciones: install
 	$(VENV_PYTHON) code/mediciones.py
 
 clean:

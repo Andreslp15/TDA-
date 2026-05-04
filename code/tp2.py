@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 import sys
 from leer_archivo import leer_archivo
 from maximizar_ganancia import maximizar_esfuerzo, reconstruir_solucion

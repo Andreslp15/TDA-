@@ -23,7 +23,7 @@ def main():
             return
 
         print(f"La ganancia optima es: {ganancia_optima}")
-        print("El camino contruido es: ")
+        print("El plan de entrenamiento es: ")
 
         for dia, accion in enumerate(camino, 1):
             print(f"Dia {dia}: {accion}")
